@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prj_wisatacandisi51/widgets/detail_screen.dart';
 import 'package:prj_wisatacandisi51/data/candi_data.dart';
 import 'package:prj_wisatacandisi51/widgets/profile_screen.dart';
+import 'package:prj_wisatacandisi51/widgets/search_screen.dart';
 import 'package:prj_wisatacandisi51/widgets/signin_screen.dart';
 import 'package:prj_wisatacandisi51/widgets/signup_screen.dart';
 
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
                 primary: Colors.deepPurple, surface: Colors.deepPurple[50]),
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const SearchScreen(),
+      // const SignUpScreen(),
       // const ProfileScreen(),
       // DetailScreen(candi: candiList[0]),
     );
