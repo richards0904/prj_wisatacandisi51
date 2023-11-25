@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                 primary: Colors.deepPurple, surface: Colors.deepPurple[50]),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const SignUpScreen(),
       // const HomeScreen(),
       // const SearchScreen(),
       // const SignUpScreen(),

@@ -14,8 +14,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String _errorText = '';
-  bool _isSigned = false;
   bool _obscurePassword = true;
+
+  // TODO: 10. Membuat fungsi _signup
+  void _signup() {
+    String name = _fullNameController.text.trim();
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (password.length < 8 ||
+        !password.contains(RegExp(r'[A-Z]')) ||
+        !password.contains(RegExp(r'[a-z]')) ||
+        !password.contains(RegExp(r'[0-9]')) ||
+        !password.contains(RegExp(r'[@#$%^&*(),.?"!:{}|<>]'))) {
+      setState(() {
+        _errorText =
+            'Minimal 8 karakter, kombinasi [A-Z], [a-z], [0-9], [!@#\\\$%^&*(),.?":{}|<>]';
+      });
+      return;
+    }
+    print("*** Sign up Berhasil!");
+    print("Nama : $name");
+    print("Nama penggguna : $username");
+    print("Password : $password");
+  }
+
+  // TODO: 11. Membuat fungsi dispose
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // TODO 8. Pasang Elevated Button Signed Up
                   const SizedBox(height: 20),
                   ElevatedButton(
-                      onPressed: () {}, child: const Text("Sign Up")),
+                      onPressed: _signup, child: const Text("Sign Up")),
                   // TODO 9. Pasang TextButton Sign Up
                   const SizedBox(height: 10),
                   // TextButton(
