@@ -33,7 +33,13 @@ class MyApp extends StatelessWidget {
                 primary: Colors.deepPurple, surface: Colors.deepPurple[50]),
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const MainScreen(),
+      initialRoute: '/',
+      routes: {
+        '/homescreen': (context) => const HomeScreen(),
+        '/signin': (context) => const SignInScreen(),
+        '/signup': (context) => const SignUpScreen(),
+      },
       // const HomeScreen(),
       // const SearchScreen(),
       // const SignUpScreen(),
@@ -63,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO 2. Buat properti  body berupa widget yang ditampilkan
+      // TODO 2. Buat properti body berupa widget yang ditampilkan
       body: _children[_currentIndex],
       bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(

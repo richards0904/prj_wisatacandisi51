@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,10 +18,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscurePassword = true;
 
   // TODO: 10. Membuat fungsi _signup
-  void _signup() {
-    String name = _fullNameController.text.trim();
-    String username = _usernameController.text.trim();
-    String password = _passwordController.text.trim();
+  void _signup() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final String name = _fullNameController.text.trim();
+    final String username = _usernameController.text.trim();
+    final String password = _passwordController.text.trim();
 
     if (password.length < 8 ||
         !password.contains(RegExp(r'[A-Z]')) ||
@@ -33,10 +36,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       return;
     }
-    print("*** Sign up Berhasil!");
-    print("Nama : $name");
-    print("Nama penggguna : $username");
-    print("Password : $password");
+    // print("*** Sign up Berhasil!");
+    // print("Nama : $name");
+    // print("Nama penggguna : $username");
+    // print("Password : $password");
+
+    prefs.setString("fullname", name);
+    prefs.setString("username", username);
+    prefs.setString("password", password);
+
+    Navigator.pushReplacementNamed(context, "/signin");
   }
 
   // TODO: 11. Membuat fungsi dispose
