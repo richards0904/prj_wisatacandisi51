@@ -10,7 +10,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   // TODO 1 Variable
-  bool isSigned = false;
+  bool isSignedIn = false;
   String fullName = "";
   String username = "";
   int favouritCandiCount = 0;
@@ -19,14 +19,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void signIn() {
     setState(() {
       Navigator.pushNamed(context, '/signin');
-      // isSigned = !isSigned;
+      // isSignedIn = !isSignedIn;
     });
   }
 
   // TODO 6. Implementasi Fungsi Sign Out
   void signOut() {
     setState(() {
-      isSigned = !isSigned;
+      isSignedIn = !isSignedIn;
     });
   }
 
@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 AssetImage('images/placeholder_image.png'),
                           ),
                         ),
-                        if (isSigned)
+                        if (isSignedIn)
                           IconButton(
                               onPressed: () {},
                               icon: const Icon(
@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     icon: Icons.person,
                     label: 'Nama',
                     value: fullName,
-                    showEditIcon: isSigned,
+                    showEditIcon: isSignedIn,
                     onEditPressed: () {
                       // Tindakan saat ikon edit ditekan
                       debugPrint("Icon edit ditekan ...");
@@ -137,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                isSigned
+                isSignedIn
                     ? TextButton(
                         onPressed: signOut, child: const Text("Sign Out"))
                     : TextButton(

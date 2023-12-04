@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -36,14 +37,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       return;
     }
+    if (name.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
+      final encrypt.Key key = encrypt.Key.fromLength(32);
+      final iv = encrypt.IV.fromLength(16);
+
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+      final encryptedName = encrypter.encrypt(name, iv: iv);
+      final encryptedUsername = encrypter.encrypt(username, iv: iv);
+      final encryptedPassword = encrypter.encrypt(password, iv: iv);
+
+      prefs.setString("fullname", encryptedName.base64);
+      prefs.setString("username", encryptedUsername.base64);
+      prefs.setString("password", encryptedPassword.base64);
+      prefs.setString("key", key.base64);
+      prefs.setString("iv", iv.base64);
+    }
     // print("*** Sign up Berhasil!");
     // print("Nama : $name");
     // print("Nama penggguna : $username");
     // print("Password : $password");
-
-    prefs.setString("fullname", name);
-    prefs.setString("username", username);
-    prefs.setString("password", password);
 
     Navigator.pushReplacementNamed(context, "/signin");
   }
